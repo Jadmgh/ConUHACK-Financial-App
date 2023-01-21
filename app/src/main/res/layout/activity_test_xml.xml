@@ -1,0 +1,128 @@
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content" >
+    <!--
+    /*
+     *	This content is generated from the API File Info.
+     *	(Alt+Shift+Ctrl+I).
+     *
+     *	@desc
+     *	@file 		iphone_14___1
+     *	@date 		Saturday 21st of January 2023 06:23:04 PM
+     *	@title 		Page 1
+     *	@author
+     *	@keywords
+     *	@generator 	Export Kit v1.3.figma
+     *
+     */
+    -->
+    <ScrollView android:id="@+id/iphone_14___1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout android:id="@+id/content_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+
+
+            <RelativeLayout android:id="@+id/page_iphone_14___1_ek1"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <View
+                    android:id="@+id/_bg__iphone_14___1_ek2"
+                    android:layout_width="390dp"
+                    android:layout_height="844dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/_bg__iphone_14___1_ek2_shape" />
+
+                <View
+                    android:id="@+id/rectangle_1"
+                    android:layout_width="390dp"
+                    android:layout_height="379dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/rectangle_1_shape" />
+
+                <TextView android:id="@+id/login"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    android:textColor="@color/login_color"
+                    android:layout_marginLeft="141dp"
+                    android:layout_marginTop="405dp"
+                    android:layout_width="176dp"
+                    android:layout_height="56dp"
+                    android:text="@string/login_string"
+                    />
+
+                <ImageView android:id="@+id/line_1"
+                    android:src="@drawable/line_1"
+                    android:contentDescription="line_1"
+                    android:layout_marginStart="141dp"
+                    android:layout_marginTop="439dp"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp" />
+
+                <TextView android:id="@+id/username_"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/username__color"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="482dp"
+                    android:layout_width="170dp"
+                    android:layout_height="52dp"
+                    android:text="@string/username__string"
+                    />
+
+                <View   android:id="@+id/line_2"
+                    android:background="@drawable/line_2_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="524dp"
+                    android:layout_width="280dp"
+                    android:layout_height="1dp" />
+
+                <TextView android:id="@+id/password_"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/username__color"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="589dp"
+                    android:layout_width="170dp"
+                    android:layout_height="52dp"
+                    android:text="@string/password__string"
+                    />
+
+                <View   android:id="@+id/line_3"
+                    android:background="@drawable/line_3_shape"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="631dp"
+                    android:layout_width="280dp"
+                    android:layout_height="1dp" />
+
+                <View   android:id="@+id/rectangle_2"
+                    android:background="@drawable/rectangle_2_shape"
+                    android:layout_marginStart="119dp"
+                    android:layout_marginTop="716dp"
+                    android:layout_width="152dp"
+                    android:layout_height="60dp" />
+
+                <TextView android:id="@+id/login_ek1"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    android:textColor="@color/_bg__iphone_14___1_ek2_color"
+                    android:layout_marginLeft="153dp"
+                    android:layout_marginTop="729dp"
+                    android:layout_width="176dp"
+                    android:layout_height="56dp"
+                    android:text="@string/login_ek1_string"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+</HorizontalScrollView>
