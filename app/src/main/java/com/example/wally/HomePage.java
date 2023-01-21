@@ -15,7 +15,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_home);
 
 
         Intent intent = getIntent();
@@ -23,7 +23,7 @@ public class HomePage extends AppCompatActivity {
         User user = new User(userValues[0],userValues[1], userValues[2],userValues[3],userValues[4]);
 
 
-        txtWelcome = (TextView) findViewById(R.id.txtWelcome);
+        txtWelcome = (TextView) findViewById(R.id.textView2);
         txtWelcome.setText("Welcome "+user.firstName);
     }
 }
