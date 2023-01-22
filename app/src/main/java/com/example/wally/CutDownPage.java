@@ -35,7 +35,7 @@ public class CutDownPage extends AppCompatActivity {
     public ArrayList<Category> listCategory;
     public ArrayList<Bill> listBills;
     public ArrayList<String> listBillsString, listCategoryString;
-    public EditText editCategory,editPrice;
+    public EditText editCategory,editPrice, editName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +54,13 @@ public class CutDownPage extends AppCompatActivity {
         listBillsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object o = listCategoryView.getItemAtPosition(position);
                 Object p = listBillsView.getItemAtPosition(position);
-                String category = (String) o;
-                String price = (String) p;
-//                openComplaintDialog(category);
+                String category = (String) p;
+                String split[]= category.split(" - ");
+                String Category = split[0].trim();
+                String[] nameList = split[1].split(" ");
+                String name = nameList[0].trim();
+                openBillDialog(Category,name);
             }
         });
         listCategoryView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,7 +102,7 @@ public class CutDownPage extends AppCompatActivity {
     private void populateListView() {
         for (int i = 0; i < listCategory.size(); i++) {
             listCategoryString.add(listCategory.get(i).name+ " - "+listCategory.get(i).price);
-            listBillsString.add(listBills.get(i).name + " - "+listBills.get(i).amount);
+            listBillsString.add(listBills.get(i).name + " - "+listBills.get(i).amount +" of every month");
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CutDownPage.this, android.R.layout.simple_list_item_1,listCategoryString);
@@ -133,6 +135,35 @@ public class CutDownPage extends AppCompatActivity {
             public void onClick(View view) {
                 if (!editCategory.getText().toString().isEmpty()) {
                     addCategory(editCategory.getText().toString(), editPrice.getText().toString());
+                    dialog2.dismiss();
+                }
+            }
+        });
+    }
+
+    public void openBillDialog(String nameOfCategory, String amount){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_add_bill,null);
+
+        editCategory = (EditText) categoryPopupView.findViewById(R.id.editCategory);
+        editName = (EditText) categoryPopupView.findViewById(R.id.editName);
+
+        dialogBuilder.setView(categoryPopupView);
+        Dialog dialog2 = dialogBuilder.create();
+        dialog2.show();
+
+
+        editCategory.setText(nameOfCategory);
+        editName.setText(amount);
+
+        Button btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
+
+        btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!editCategory.getText().toString().isEmpty() && !editName.getText().toString().isEmpty()) {
+                    addCategory(editCategory.getText().toString(), editName.getText().toString());
                     dialog2.dismiss();
                 }
             }
