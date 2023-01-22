@@ -10,8 +10,8 @@ public class User {
 
     public String email, password, userID, firstName, lastName;
     public ArrayList<Category> categories;
+    public ArrayList<Bill> bills;
 
-    //    public String userID;
     public User(){
 
     }

@@ -90,15 +90,15 @@ public class Register extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     User user = new User(email, password, FirebaseAuth.getInstance().getCurrentUser().getUid(),firstName, lastName);
-                    Toast.makeText(Register.this, "aeifa", Toast.LENGTH_SHORT).show();
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(Register.this, "You have successfully been registered", Toast.LENGTH_LONG).show();
-                                        startActivity(new Intent(Register.this, MainActivity.class));
-
+                                        Intent i = new Intent(Register.this, BudgetInfo.class);
+                                        i.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid() );
+                                        startActivity(i);
                                     } else {
                                         Toast.makeText(Register.this, "Failed to register. Try again!", Toast.LENGTH_LONG).show();
                                     }
