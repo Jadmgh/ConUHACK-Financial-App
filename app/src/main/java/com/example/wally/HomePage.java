@@ -360,7 +360,7 @@ public class HomePage extends AppCompatActivity {
         pieChart.setEntryLabelTextSize(12);
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setCenterText("Spending Categories");
-        pieChart.setCenterTextSize(24);
+        pieChart.setCenterTextSize(12);
         pieChart.getDescription().setEnabled(false);
 
         Legend l = pieChart.getLegend();
