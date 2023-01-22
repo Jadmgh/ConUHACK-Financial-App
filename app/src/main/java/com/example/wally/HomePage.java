@@ -77,7 +77,7 @@ public class HomePage extends AppCompatActivity {
         String [] userValues = intent.getStringArrayExtra("userValues");
         user = new User(userValues[0],userValues[1], userValues[2],userValues[3],userValues[4]);
 
-        btnAddCategory = (Button) findViewById(R.id.btnAdd);
+
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
