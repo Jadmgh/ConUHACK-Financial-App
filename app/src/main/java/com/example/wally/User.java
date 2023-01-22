@@ -11,6 +11,8 @@ public class User {
     public String email, password, userID, firstName, lastName;
     public ArrayList<Category> categories;
     public ArrayList<Bill> bills;
+    public String totalSpent;
+
 
     public User(){
 
@@ -23,6 +25,7 @@ public class User {
         this.lastName = lastName;
         this.userID = userID;
         this.categories = new ArrayList<>();
+        totalSpent = "0.0";
     }
 
     public String toString(){

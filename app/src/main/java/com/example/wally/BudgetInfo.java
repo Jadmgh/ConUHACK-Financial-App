@@ -1,6 +1,5 @@
 package com.example.wally;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,19 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.nio.charset.StandardCharsets;
 
 public class BudgetInfo extends AppCompatActivity {
 
     public EditText editIncome, editElectricityBill, editElectricityBillDue, editPhoneBill, editPhoneBillDue, editInternetBill, editInternetBillDue, editRent, editRentDue;
     private Button btnFinish;
-    public String electricityBillDue, electricityBill, phoneBill, phoneBillDue, internetBill, internetBillDue, rent, rentDue, editIncomeString;
+    public String electricityBillDue, electricityBillString, phoneBillString, phoneBillDue, internetBillString, internetBillDue, rentString, rentDue, editIncomeString;
     private String userID;
 
     @Override
@@ -46,18 +40,18 @@ public class BudgetInfo extends AppCompatActivity {
             public void onClick(View view) {
                 editIncomeString = editIncome.getText().toString();
                 electricityBillDue = editElectricityBillDue.getText().toString();
-                electricityBill = editElectricityBill.getText().toString();
-                phoneBill = editPhoneBill.getText().toString();
+                electricityBillString = editElectricityBill.getText().toString();
+                phoneBillString = editPhoneBill.getText().toString();
                 phoneBillDue = editPhoneBillDue.getText().toString();
-                internetBill = editInternetBill.getText().toString();
+                internetBillString = editInternetBill.getText().toString();
                 internetBillDue = editInternetBillDue.getText().toString();
-                rent = editRent.getText().toString();
+                rentString = editRent.getText().toString();
                 rentDue = editRentDue.getText().toString();
 
-                Category electricityCategory = new Category("Electricity",electricityBill);
-                Category phoneCategory = new Category("Phone Bill",phoneBill);
-                Category internetCategory = new Category("Internet Bill",internetBill);
-                Category rentCategory = new Category("Rent",rent);
+                Category electricityCategory = new Category("Electricity",electricityBillString);
+                Category phoneCategory = new Category("Phone Bill", phoneBillString);
+                Category internetCategory = new Category("Internet Bill", internetBillString);
+                Category rentCategory = new Category("Rent",rentString);
 
                 Bill electricityBill = new Bill("Electricity", electricityBillDue);
                 Bill phoneBill = new Bill("Phone Bill", phoneBillDue);
@@ -79,8 +73,12 @@ public class BudgetInfo extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("Users").child(userID).child("bills").child("Internet").setValue(internetBill);
                 FirebaseDatabase.getInstance().getReference("Users").child(userID).child("bills").child("Rent").setValue(rentBill);
 
+                Float total = Float.parseFloat(electricityBillString) + Float.parseFloat(internetBillString)+ Float.parseFloat(phoneBillString)+ Float.parseFloat(rentString);
+                FirebaseDatabase.getInstance().getReference("Users").child(userID).child("totalSpent").setValue(total);
 
                 startActivity(new Intent(BudgetInfo.this,MainActivity.class));
+
+                
             }
         });
 

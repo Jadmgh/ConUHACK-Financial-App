@@ -55,8 +55,8 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         user = new User(userValues[0],userValues[1], userValues[2],userValues[3],userValues[4]);
 
         btnAddCategory = (Button) findViewById(R.id.btnAdd);
-        listCategoryView = (ListView) findViewById(R.id.listCategory);
-        listPriceView = (ListView) findViewById(R.id.listPrice);
+//        listCategoryView = (ListView) findViewById(R.id.listCategory);
+//        listPriceView = (ListView) findViewById(R.id.listPrice);
 
         btnAddCategory.setOnClickListener(this);
 
@@ -127,6 +127,19 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(HomePage.this, "Item was successfully added", Toast.LENGTH_SHORT).show();
+                FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Float previousTotal = Float.parseFloat(snapshot.getValue().toString());
+                        Float newTotal = previousTotal + Float.parseFloat(price);
+                        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").setValue(newTotal.toString());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 updateListview();
             }
         });

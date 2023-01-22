@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/txtProfileDetails"
+        android:layout_width="373dp"
+        android:layout_height="51dp"
+        android:text="Profile Details" />
+
+    <TextView
+        android:id="@+id/txtFeedback"
+        android:layout_width="374dp"
+        android:layout_height="57dp"
+        android:text="Send Feedback" />
+
+    <TextView
+        android:id="@+id/txtPrivacyPolicy"
+        android:layout_width="373dp"
+        android:layout_height="52dp"
+        android:text="Privacy Policy" />
+
+    <TextView
+        android:id="@+id/txtNeedHelp"
+        android:layout_width="373dp"
+        android:layout_height="57dp"
+        android:text="Need Help" />
+
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Out" />
+
+</LinearLayout>
