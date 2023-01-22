@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cost of electricity:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/editElectricityBill"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Due date of bill:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editElectricityBillDue"
             android:layout_width="0dp"
@@ -64,26 +64,28 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:id="@+id/txtPhoneBill"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cost of phone:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editPhoneBill"
             android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:inputType="numberDecimal" />
+
         <TextView
             android:id="@+id/txtPhoneBillDue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Due date of bill:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editPhoneBillDue"
             android:layout_width="0dp"
@@ -98,26 +100,28 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:id="@+id/txtInternetBill"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cost of internet:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editInternetBill"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="numberDecimal" />
+
         <TextView
             android:id="@+id/txtInternetBillDue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Due date of bill:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editInternetBillDue"
             android:layout_width="0dp"
@@ -132,26 +136,28 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:id="@+id/txtRent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cost of rent:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editRent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="numberDecimal" />
+
         <TextView
             android:id="@+id/txtRentDue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Due date of bill:"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
         <EditText
             android:id="@+id/editRentDue"
             android:layout_width="0dp"
