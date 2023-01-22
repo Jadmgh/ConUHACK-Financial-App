@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EDEAE2"
     tools:context=".Register">
 
     <EditText
@@ -55,28 +56,18 @@
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#E17327"
+        android:backgroundTint="#056608"
         android:text="@string/register_now"
         tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="642dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="252dp"
-        android:layout_height="77dp"
-        android:text="@string/keep_your_money_sweet_like_honey"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="550dp" />
+        tools:layout_editor_absoluteY="562dp" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="327dp"
-        android:layout_height="298dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:id="@+id/imageButton5"
+        android:layout_width="461dp"
+        android:layout_height="375dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/editFirstName"
+        app:srcCompat="@drawable/logo2"
+        tools:layout_editor_absoluteX="-25dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

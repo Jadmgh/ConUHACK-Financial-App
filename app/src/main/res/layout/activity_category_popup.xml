@@ -60,7 +60,7 @@
         android:id="@+id/btnSaveCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#E17327"
+        android:backgroundTint="#056608"
         android:text="Save" />
 
 </LinearLayout>

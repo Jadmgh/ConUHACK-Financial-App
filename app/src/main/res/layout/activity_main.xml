@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EDEAE2"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/logo" />
+        android:id="@+id/imageView3"
+        android:layout_width="459dp"
+        android:layout_height="278dp"
+        app:srcCompat="@drawable/logo2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/black"
         android:text="@string/username"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -27,16 +28,16 @@
         android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:hint="@string/enter_username"
-        android:textAlignment="center"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/black"
         android:text="@string/password"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -44,18 +45,18 @@
         android:id="@+id/editPassword"
         android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:hint="@string/enter_password"
+        android:inputType="textPassword"
         android:textAlignment="center"
-        android:inputType="textPassword" />
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:backgroundTint="#056608"
         android:text="@string/login"
-        android:backgroundTint="#E17327"
         tools:ignore="DuplicateIds" />
 
     <TextView
@@ -63,7 +64,7 @@
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:text="New to Wally? Click here to register here."
-        android:textColor="@color/black"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/black" />
 
 </LinearLayout>
