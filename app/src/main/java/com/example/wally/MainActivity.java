@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnLogin;
+    private Button btnPie;
     private FirebaseAuth mAuth;
 
     private EditText editEmail, editPassword;
@@ -44,8 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         FirebaseAuth.getInstance().signOut();
 
+
         btnLogin = (Button) findViewById(R.id.btnSignIn);
         btnLogin.setOnClickListener(this);
+
+        btnPie = (Button) findViewById(R.id.btnTest);
+        btnPie.setOnClickListener(this);
 
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtRegister.setOnClickListener(this);
 
         btnLogin.setOnClickListener(this);
+        btnPie.setOnClickListener(this);
 
 
     }
@@ -67,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnSignIn:
                 userLogin();
+                break;
+
+            case R.id.btnTest:
+                Intent i = new Intent(MainActivity.this, Pie_chart.class);
+                startActivity(i);
                 break;
         }
     }
