@@ -7,39 +7,16 @@
     tools:context=".Register">
 
     <EditText
-        android:id="@+id/editFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="First Name"
-        android:textAlignment="center"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176"
-        tools:layout_editor_absoluteX="79dp" />
-
-    <EditText
         android:id="@+id/editLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Last Name"
-        android:textAlignment="center"
+        android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editFirstName"
-        tools:layout_editor_absoluteX="79dp" />
-
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
         android:textAlignment="center"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editLastName"
-        tools:layout_editor_absoluteX="79dp" />
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="380dp" />
 
     <EditText
         android:id="@+id/editMakePassword"
@@ -47,19 +24,59 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
-        android:textAlignment="center"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail"
-        tools:layout_editor_absoluteX="79dp" />
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="478dp" />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="331dp" />
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
         android:backgroundTint="#E17327"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editMakePassword"
-        tools:layout_editor_absoluteX="133dp" />
+        android:text="@string/register_now"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="642dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="252dp"
+        android:layout_height="77dp"
+        android:text="@string/keep_your_money_sweet_like_honey"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="550dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="327dp"
+        android:layout_height="298dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

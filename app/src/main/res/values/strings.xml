@@ -13,5 +13,9 @@
 	<string name="login">Login</string>
 	<string name="enter_username">Enter your username</string>
 	<string name="enter_password">Enter your password</string>
+    <string name="keep_your_money_sweet_like_honey">Keep Your Money Sweet Like Honey!</string>
+	<string name="register">Register</string>
+	<string name="last_name">Last Name</string>
+    <string name="register_now">register now!</string>
 
 </resources>
