@@ -55,7 +55,7 @@ public class HomePage extends AppCompatActivity {
     private PieChart pieChart;
     private ProgressBar progressBar;
     private ClipData.Item plus;
-    private FloatingActionButton plusSign;
+    private FloatingActionButton plusSign, editExisting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,8 @@ public class HomePage extends AppCompatActivity {
 
 
         plusSign = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        editExisting = (FloatingActionButton) findViewById(R.id.floatingActionButton5);
         listBills = new ArrayList<>();
-//        plus = (ClipData.Item) findViewById(R.id.add);
 
         categories = new ArrayList<>();
         listPrice = new ArrayList<>();
@@ -74,8 +74,8 @@ public class HomePage extends AppCompatActivity {
         arrayListBills = new ArrayList<>();
 
         Intent intent = getIntent();
-        String [] userValues = intent.getStringArrayExtra("userValues");
-        user = new User(userValues[0],userValues[1], userValues[2],userValues[3],userValues[4]);
+        String[] userValues = intent.getStringArrayExtra("userValues");
+        user = new User(userValues[0], userValues[1], userValues[2], userValues[3], userValues[4]);
 
 
 
@@ -86,7 +86,7 @@ public class HomePage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Float spent = Float.parseFloat(snapshot.child("totalSpent").getValue().toString());
                 Float income = Float.parseFloat(snapshot.child("income").getValue().toString());
-                int progress = Math.round(spent*100/income);
+                int progress = Math.round(spent * 100 / income);
                 progressBar.setProgress(progress);
                 Toast.makeText(HomePage.this, spent.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -112,38 +112,15 @@ public class HomePage extends AppCompatActivity {
                 makeNewAnything();
             }
         });
-//        listCategoryView = (ListView) findViewById(R.id.listCategory);
-//        listPriceView = (ListView) findViewById(R.id.listPrice);
 
-//        btnAddCategory.setOnClickListener(this);
-
-//        updateListview();
-//        txtWelcome = (TextView) findViewById(R.id.txtWelcome);
-//        txtWelcome.setText("Welcome "+user.firstName);
-
-//        listPriceView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Object o = listCategoryView.getItemAtPosition(position);
-//                Object p = listPriceView.getItemAtPosition(position);
-//                String category = (String) o;
-//                String price = (String) p;
-//                openDialog(category, price);
-//
-//            }
-//        });
-//        listCategoryView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Object o = listCategoryView.getItemAtPosition(position);
-//                Object p = listPriceView.getItemAtPosition(position);
-//                String category = (String) o;
-//                String price = (String) p;
-//                openDialog(category, price);
-//
-//            }
-//        });
+        editExisting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomePage.this, CutDownPage.class));
+            }
+        });
     }
+
 
     private void populateListView() {
         for (int i = 0; i < categories.size(); i++) {
