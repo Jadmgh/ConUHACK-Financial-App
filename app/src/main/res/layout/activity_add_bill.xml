@@ -7,7 +7,7 @@
     <TableLayout
         android:id="@+id/table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="106dp"
         android:padding="10dp">
 
         <TableRow>
@@ -15,10 +15,20 @@
             <TextView
                 android:id="@+id/txtNameOfBill"
                 android:layout_width="229dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Category"
+                android:text="Name Of Bill"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Amount ($)"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -28,12 +38,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Price / Month"
+                android:text="Day due each month"
                 android:textSize="15sp"
                 android:textStyle="bold" />
+
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="53dp">
+
+            <EditText
+                android:id="@+id/editCategory"
+                android:layout_width="222dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="ex: Water"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/editPrice"
+                android:layout_width="109dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="ex: 150"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editName"
@@ -42,15 +73,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:hint="ex: Food"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/editPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="ex: $120"
                 android:textSize="15sp" />
 
         </TableRow>

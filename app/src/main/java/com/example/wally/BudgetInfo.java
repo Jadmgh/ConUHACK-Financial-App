@@ -53,7 +53,7 @@ public class BudgetInfo extends AppCompatActivity {
                 Category internetCategory = new Category("Internet Bill", internetBillString);
                 Category rentCategory = new Category("Rent",rentString);
 
-                Bill electricityBill = new Bill("Electricity", electricityBillDue);
+                Bill electricityBill = new Bill("Electricity",electricityBillDue);
                 Bill phoneBill = new Bill("Phone Bill", phoneBillDue);
                 Bill internetBill = new Bill("Internet Bill", internetBillDue);
                 Bill rentBill = new Bill("Rent", rentDue);

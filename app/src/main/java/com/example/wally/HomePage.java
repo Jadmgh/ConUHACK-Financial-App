@@ -4,16 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,23 +34,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
+import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomePage extends AppCompatActivity {
 
-    public TextView txtWelcome;
+    public TextView txtWelcome,editAddCategory,editAddBill;
     public User user;
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-    private EditText editCategory, editPrice;
+    private AlertDialog.Builder dialogBuilder, dialogBuilder2, dialogBuilder3;
+    private AlertDialog dialog,dialog2,dialog3;
+    private EditText editCategory, editPrice, editName;
     public Button btnSaveCategory, btnAddCategory;
-    public ListView listPriceView, listCategoryView;
-    public ArrayList<String> listPrice, listCategory;
+    public ListView listPriceView, listCategoryView, listBillsView, editAddCategorie;
+    public ArrayList<String> listPrice, listCategory, listBills;
     public ArrayList<Category> categories;
+    public ArrayList<Bill> arrayListBills;
     private PieChart pieChart;
+    private ProgressBar progressBar;
+    private ClipData.Item plus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +61,47 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
+        listBills = new ArrayList<>();
+//        plus = (ClipData.Item) findViewById(R.id.add);
+
         categories = new ArrayList<>();
         listPrice = new ArrayList<>();
         listCategory = new ArrayList<>();
+
+        arrayListBills = new ArrayList<>();
 
         Intent intent = getIntent();
         String [] userValues = intent.getStringArrayExtra("userValues");
         user = new User(userValues[0],userValues[1], userValues[2],userValues[3],userValues[4]);
 
         btnAddCategory = (Button) findViewById(R.id.btnAdd);
-//        startActivity(new Intent(HomePage.this,Pie_chart.class));
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Integer spent = Integer.parseInt(snapshot.child("totalSpent").getValue().toString());
+                Integer income = Integer.parseInt(snapshot.child("income").getValue().toString());
+                Integer progress = spent*100/income;
+                progressBar.setProgress(progress);
+                Toast.makeText(HomePage.this, spent.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         pieChart = findViewById(R.id.activity_pie_chart);
         setupPieChart();
         loadPieChartData();
+
+        listBillsView = (ListView) findViewById(R.id.listBills);
+
+        updateBillsListview();
 //        listCategoryView = (ListView) findViewById(R.id.listCategory);
 //        listPriceView = (ListView) findViewById(R.id.listPrice);
 
@@ -105,42 +135,194 @@ public class HomePage extends AppCompatActivity {
 //        });
     }
 
-//    private void openDialog(String category,String price) {
+    private void populateListView() {
+        for (int i = 0; i < categories.size(); i++) {
+            listCategory.add(categories.get(i).name);
+            listPrice.add(categories.get(i).price);
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1,listCategory);
+        listCategoryView.setAdapter(arrayAdapter);
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1,listPrice);
+        listPriceView.setAdapter(arrayAdapter2);
+    }
+
+
+        public void updateBillsListview(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("bills");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Bill> temp = new ArrayList<Bill>();
+
+                for (DataSnapshot billSnapshot : snapshot.getChildren()) {
+                       Bill bills= new Bill(billSnapshot.child("name").getValue().toString(), billSnapshot.child("amount").getValue().toString());
+                       arrayListBills.add(bills);
+                       temp.add(bills);
+                }
+
+                ArrayList<Integer> indexes = new ArrayList<Integer>();
+
+
+                ArrayList<Bill> temp2 = new ArrayList<Bill>();
+                while (!temp.isEmpty()){
+                    int minIndex =0;
+                    for (int i = 0; i < temp.size(); i++) {
+                        if (Integer.parseInt(temp.get(i).amount)<Integer.parseInt(temp.get(minIndex).amount)){
+                            minIndex = i;
+                        }
+                    }
+                    temp2.add(temp.get(minIndex));
+                    temp.remove(minIndex);
+                }
+
+                Calendar cal = Calendar.getInstance();
+                Date now = cal.getTime();
+//                Integer days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                for (int i = 0; i < temp2.size(); i++) {
+                    if(Integer.parseInt(temp2.get(i).amount) >22) {
+                        listBills.add(temp2.get(i).name + " due in "+ (Integer.parseInt(temp2.get(i).amount) -22)+" days");
+                    }
+                }
+
+                if (listBills.isEmpty()){
+                    listBills.add("No bills left to pay this month!");
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1,listBills);
+                listBillsView.setAdapter(arrayAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+
+
+    public void addCategory(String category, String price){
+        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("categories").child(category).setValue(new Category(category,price)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(HomePage.this, "Item was successfully added", Toast.LENGTH_SHORT).show();
+                FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Float previousTotal = Float.parseFloat(snapshot.getValue().toString());
+                        Float newTotal = previousTotal + Float.parseFloat(price);
+                        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").setValue(newTotal.toString());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                loadPieChartData();
+            }
+        });
+    }
+
+
+//
+    public void openNewDialog(){
+
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
+
+        editCategory = (EditText) categoryPopupView.findViewById(R.id.editName);
+        editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
+
+        dialogBuilder.setView(categoryPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!editCategory.getText().toString().isEmpty()) {
+                    addCategory(editCategory.getText().toString(), editPrice.getText().toString());
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+//    public void makeNewAnything(){
 //        dialogBuilder = new AlertDialog.Builder(this);
-//        final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
+//        final View addAnythingPopout = getLayoutInflater().inflate(R.layout.activity_add_something,null);
 //
-//        editCategory = (EditText) categoryPopupView.findViewById(R.id.editCategory);
-//        editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
+//        editAddBill = (TextView) addAnythingPopout.findViewById(R.id.newBill);
+//        editAddCategory = (TextView) addAnythingPopout.findViewById(R.id.newMonthlyExpense);
 //
-//        btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
 //
-//        dialogBuilder.setView(categoryPopupView);
+//        dialogBuilder.setView(addAnythingPopout);
 //        dialog = dialogBuilder.create();
 //        dialog.show();
 //
-//        editCategory.setText(category);
-//        editPrice.setText(price);
-//        btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+//        editAddCategorie.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                if (!editCategory.getText().toString().isEmpty()) {
-//                    addCategory(editCategory.getText().toString(), editPrice.getText().toString());
-//                    dialog.dismiss();
-//                }
+//                 dialogBuilder2 = new AlertDialog.Builder(HomePage.this);
+//                final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
+//
+//                editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
+//                editCategory = (EditText) categoryPopupView.findViewById(R.id.editName);
+//
+//                btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
+//                dialogBuilder2.setView(categoryPopupView);
+//                dialog2 = dialogBuilder2.create();
+//                dialog2.show();
+//
+//                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (!editCategory.getText().toString().isEmpty()) {
+//                            addCategory(editCategory.getText().toString(), editPrice.getText().toString());
+//                            dialog2.dismiss();
+//                        }
+//                    }
+//                });
+//
 //            }
+//        });
+//
+//        editAddBill.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialogBuilder3 = new AlertDialog.Builder(HomePage.this);
+//                final View billPopupView = getLayoutInflater().inflate(R.layout.activity_add_bill,null);
+//
+//                editName = (EditText) billPopupView.findViewById(R.id.editName);
+//                editPrice = (EditText) billPopupView.findViewById(R.id.editPrice);
+//                editCategory = (EditText) billPopupView.findViewById(R.id.editCategory);
+//
+//                btnSaveCategory = (Button) billPopupView.findViewById(R.id.btnSaveCategory);
+//
+//                dialogBuilder3.setView(billPopupView);
+//                dialog3 = dialogBuilder3.create();
+//                dialog3.show();
+//
+//                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (!editCategory.getText().toString().isEmpty()) {
+//                            addBill(editCategory.getText().toString(), editPrice.getText().toString(), editName.getText().toString());
+//                            dialog3.dismiss();
+//                        }
+//                    }
+//                });
+//
+//            }
+//
 //        });
 //    }
 //
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.btnAdd:
-//                openNewDialog();
-//        }
-//    }
-////
-//    public void addCategory(String category, String price){
-//        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("categories").child(category).setValue(new Category(category,price)).addOnCompleteListener(new OnCompleteListener<Void>() {
+//    private void addBill(String category, String Price, String duration) {
+//        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("bills").child(category).setValue(new Bill()).addOnCompleteListener(new OnCompleteListener<Void>() {
 //            @Override
 //            public void onComplete(@NonNull Task<Void> task) {
 //                Toast.makeText(HomePage.this, "Item was successfully added", Toast.LENGTH_SHORT).show();
@@ -157,68 +339,10 @@ public class HomePage extends AppCompatActivity {
 //
 //                    }
 //                });
-//                updateListview();
+//                loadPieChartData();
 //            }
 //        });
 //    }
-//
-//    public void updateListview(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("categories");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
-//                    Category category = new Category(categorySnapshot.child("name").getValue().toString(), categorySnapshot.child("price").getValue().toString());
-//                    categories.add(category);
-//                }
-//                populateListView();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-//    }
-
-//
-//    public void openNewDialog(){
-//
-//        dialogBuilder = new AlertDialog.Builder(this);
-//        final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
-//
-//        editCategory = (EditText) categoryPopupView.findViewById(R.id.editCategory);
-//        editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
-//
-//        btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
-//
-//        dialogBuilder.setView(categoryPopupView);
-//        dialog = dialogBuilder.create();
-//        dialog.show();
-//
-//        btnSaveCategory.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (!editCategory.getText().toString().isEmpty()) {
-//                    addCategory(editCategory.getText().toString(), editPrice.getText().toString());
-//                    dialog.dismiss();
-//                }
-//            }
-//        });
-//    }
-////
-//    private void populateListView() {
-//        for (int i = 0; i < categories.size(); i++) {
-//            listCategory.add(categories.get(i).name);
-//            listPrice.add(categories.get(i).price);
-//        }
-//
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1,listCategory);
-//        listCategoryView.setAdapter(arrayAdapter);
-//        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1,listPrice);
-//        listPriceView.setAdapter(arrayAdapter2);
-//    }
-
-
 
     private void setupPieChart(){
         pieChart.setUsePercentValues(true);
@@ -244,7 +368,6 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot categorySnapshot : snapshot.child("categories").getChildren()) {
-                    Toast.makeText(HomePage.this, "accessed", Toast.LENGTH_SHORT).show();
                     entries.add(new PieEntry(Float.parseFloat(categorySnapshot.child("price").getValue().toString()), categorySnapshot.child("name").getValue()));
 //                     entries.add(new PieEntry(0.3f,"test"));
                 }
