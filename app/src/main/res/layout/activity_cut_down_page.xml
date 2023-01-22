@@ -11,13 +11,15 @@
         android:id="@+id/listBills"
         android:layout_width="413dp"
         android:layout_height="225dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginBottom="84dp"
         android:background="#D0C8B3"
         android:cacheColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/listCategory"
+        app:layout_constraintVertical_bias="0.891" />
 
     <ListView
         android:id="@+id/listCategory"
@@ -49,7 +51,7 @@
         android:id="@+id/textView4"
         android:layout_width="75dp"
         android:layout_height="22dp"
-        android:layout_marginTop="444dp"
+        android:layout_marginTop="76dp"
         android:text="Bills:"
         android:textAllCaps="true"
         android:textSize="16sp"
@@ -58,6 +60,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/listCategory"
+        app:layout_constraintVertical_bias="0.521" />
 </androidx.constraintlayout.widget.ConstraintLayout>

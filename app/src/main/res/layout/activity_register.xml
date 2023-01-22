@@ -16,8 +16,12 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editFirstName"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editMakePassword"
@@ -28,20 +32,27 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmail"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLastName"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editFirstName"
@@ -51,8 +62,10 @@
         android:hint="First Name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -61,16 +74,18 @@
         android:backgroundTint="#056608"
         android:text="@string/register_now"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmail"
-        app:layout_constraintVertical_bias="0.387"
-        tools:layout_editor_absoluteX="129dp" />
+        app:layout_constraintVertical_bias="0.387" />
 
     <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="461dp"
         android:layout_height="375dp"
+        android:layout_marginBottom="396dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/editFirstName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/logo2"
         tools:layout_editor_absoluteX="-25dp" />
 
