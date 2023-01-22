@@ -17,15 +17,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
         android:text="@string/username"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="match_parent"
+        android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:hint="@string/enter_username"
+        android:textAlignment="center"
         android:inputType="text" />
 
     <TextView
@@ -33,15 +35,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
         android:text="@string/password"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editPassword"
-        android:layout_width="match_parent"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:hint="@string/enter_password"
+        android:textAlignment="center"
         android:inputType="textPassword" />
 
     <Button
@@ -50,12 +55,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/login"
+        android:backgroundTint="#E17327"
         tools:ignore="DuplicateIds" />
 
     <TextView
         android:id="@+id/txtRegister"
-        android:layout_width="match_parent"
+        android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="New to Wally? Click here to register here."
+        android:textColor="@color/black"
+        android:textAlignment="center"/>
 
 </LinearLayout>
