@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogin = (Button) findViewById(R.id.btnSignIn);
         btnLogin.setOnClickListener(this);
 
-        btnPie = (Button) findViewById(R.id.btnTest);
-        btnPie.setOnClickListener(this);
-
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
 

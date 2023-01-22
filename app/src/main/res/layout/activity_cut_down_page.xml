@@ -4,42 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEAE2"
+    android:background="#EED1CDC4"
     tools:context=".CutDownPage">
 
     <ListView
         android:id="@+id/listBills"
         android:layout_width="413dp"
         android:layout_height="225dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintTop_toBottomOf="@+id/listCategory"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_marginTop="176dp"
+        android:background="#D0C8B3"
+        android:cacheColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listCategory" />
 
     <ListView
         android:id="@+id/listCategory"
         android:layout_width="413dp"
         android:layout_height="225dp"
-        android:layout_marginTop="56dp"
+        android:background="#CFC7B2"
+        android:cacheColorHint="#170F0F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.098" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="123dp"
+        android:layout_height="23dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Categories"
+        android:text="Categories:"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="300dp"
-        android:text="Bills"
+        android:layout_width="75dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="444dp"
+        android:text="Bills:"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listBills"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
