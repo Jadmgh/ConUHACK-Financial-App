@@ -73,11 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnSignIn:
                 userLogin();
-                break;
-
-            case R.id.btnTest:
-                Intent i = new Intent(MainActivity.this, Pie_chart.class);
-                startActivity(i);
+//                Intent i = new Intent(MainActivity.this, Pie_chart.class);
+//                startActivity(i);
                 break;
         }
     }
@@ -125,4 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+
 }
