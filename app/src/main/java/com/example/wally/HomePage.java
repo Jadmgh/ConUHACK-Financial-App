@@ -27,6 +27,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,6 +55,7 @@ public class HomePage extends AppCompatActivity {
     private PieChart pieChart;
     private ProgressBar progressBar;
     private ClipData.Item plus;
+    private FloatingActionButton plusSign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
+        plusSign = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         listBills = new ArrayList<>();
 //        plus = (ClipData.Item) findViewById(R.id.add);
 
@@ -81,9 +84,9 @@ public class HomePage extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("Users").child(user.userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Integer spent = Integer.parseInt(snapshot.child("totalSpent").getValue().toString());
-                Integer income = Integer.parseInt(snapshot.child("income").getValue().toString());
-                Integer progress = spent*100/income;
+                Float spent = Float.parseFloat(snapshot.child("totalSpent").getValue().toString());
+                Float income = Float.parseFloat(snapshot.child("income").getValue().toString());
+                int progress = Math.round(spent*100/income);
                 progressBar.setProgress(progress);
                 Toast.makeText(HomePage.this, spent.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -102,6 +105,13 @@ public class HomePage extends AppCompatActivity {
         listBillsView = (ListView) findViewById(R.id.listBills);
 
         updateBillsListview();
+
+        plusSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeNewAnything();
+            }
+        });
 //        listCategoryView = (ListView) findViewById(R.id.listCategory);
 //        listPriceView = (ListView) findViewById(R.id.listPrice);
 
@@ -251,86 +261,87 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-//    public void makeNewAnything(){
-//        dialogBuilder = new AlertDialog.Builder(this);
-//        final View addAnythingPopout = getLayoutInflater().inflate(R.layout.activity_add_something,null);
-//
-//        editAddBill = (TextView) addAnythingPopout.findViewById(R.id.newBill);
-//        editAddCategory = (TextView) addAnythingPopout.findViewById(R.id.newMonthlyExpense);
-//
-//
-//        dialogBuilder.setView(addAnythingPopout);
-//        dialog = dialogBuilder.create();
-//        dialog.show();
-//
-//        editAddCategorie.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                 dialogBuilder2 = new AlertDialog.Builder(HomePage.this);
-//                final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
-//
-//                editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
-//                editCategory = (EditText) categoryPopupView.findViewById(R.id.editName);
-//
-//                btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
-//                dialogBuilder2.setView(categoryPopupView);
-//                dialog2 = dialogBuilder2.create();
-//                dialog2.show();
-//
-//                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (!editCategory.getText().toString().isEmpty()) {
-//                            addCategory(editCategory.getText().toString(), editPrice.getText().toString());
-//                            dialog2.dismiss();
-//                        }
-//                    }
-//                });
-//
-//            }
-//        });
-//
-//        editAddBill.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogBuilder3 = new AlertDialog.Builder(HomePage.this);
-//                final View billPopupView = getLayoutInflater().inflate(R.layout.activity_add_bill,null);
-//
-//                editName = (EditText) billPopupView.findViewById(R.id.editName);
-//                editPrice = (EditText) billPopupView.findViewById(R.id.editPrice);
-//                editCategory = (EditText) billPopupView.findViewById(R.id.editCategory);
-//
-//                btnSaveCategory = (Button) billPopupView.findViewById(R.id.btnSaveCategory);
-//
-//                dialogBuilder3.setView(billPopupView);
-//                dialog3 = dialogBuilder3.create();
-//                dialog3.show();
-//
-//                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (!editCategory.getText().toString().isEmpty()) {
+    public void makeNewAnything(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View addAnythingPopout = getLayoutInflater().inflate(R.layout.activity_add_something,null);
+
+        editAddBill = (TextView) addAnythingPopout.findViewById(R.id.newBill);
+        editAddCategory = (TextView) addAnythingPopout.findViewById(R.id.newMonthlyExpense);
+
+
+        dialogBuilder.setView(addAnythingPopout);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        editAddCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 dialogBuilder2 = new AlertDialog.Builder(HomePage.this);
+                final View categoryPopupView = getLayoutInflater().inflate(R.layout.activity_category_popup,null);
+
+                editPrice = (EditText) categoryPopupView.findViewById(R.id.editPrice);
+                editCategory = (EditText) categoryPopupView.findViewById(R.id.editName);
+
+                btnSaveCategory = (Button) categoryPopupView.findViewById(R.id.btnSaveCategory);
+                dialogBuilder2.setView(categoryPopupView);
+                dialog2 = dialogBuilder2.create();
+                dialog2.show();
+
+                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!editCategory.getText().toString().isEmpty()) {
+                            addCategory(editCategory.getText().toString(), editPrice.getText().toString());
+                            dialog2.dismiss();
+                        }
+                    }
+                });
+
+            }
+        });
+
+        editAddBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogBuilder3 = new AlertDialog.Builder(HomePage.this);
+                final View billPopupView = getLayoutInflater().inflate(R.layout.activity_add_bill,null);
+
+                editName = (EditText) billPopupView.findViewById(R.id.editName);
+                editPrice = (EditText) billPopupView.findViewById(R.id.editPrice);
+                editCategory = (EditText) billPopupView.findViewById(R.id.editCategory);
+
+                btnSaveCategory = (Button) billPopupView.findViewById(R.id.btnSaveCategory);
+
+                dialogBuilder3.setView(billPopupView);
+                dialog3 = dialogBuilder3.create();
+                dialog3.show();
+
+                btnSaveCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!editCategory.getText().toString().isEmpty()) {
 //                            addBill(editCategory.getText().toString(), editPrice.getText().toString(), editName.getText().toString());
-//                            dialog3.dismiss();
-//                        }
-//                    }
-//                });
-//
-//            }
-//
-//        });
-//    }
-//
+                            FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("bills").child(editCategory.getText().toString()).setValue(new Bill(editCategory.getText().toString(),editPrice.getText().toString()));
+                            dialog3.dismiss();
+                        }
+                    }
+                });
+
+            }
+
+        });
+    }
+
 //    private void addBill(String category, String Price, String duration) {
-//        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("bills").child(category).setValue(new Bill()).addOnCompleteListener(new OnCompleteListener<Void>() {
+//        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("bills").child(category).setValue(new Bill(category,Price)).addOnCompleteListener(new OnCompleteListener<Void>() {
 //            @Override
 //            public void onComplete(@NonNull Task<Void> task) {
 //                Toast.makeText(HomePage.this, "Item was successfully added", Toast.LENGTH_SHORT).show();
-//                FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").addValueEventListener(new ValueEventListener() {
+//                FirebaseDatabase.getInstance().getReference("Users").child(user.userID).addValueEventListener(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        Float previousTotal = Float.parseFloat(snapshot.getValue().toString());
-//                        Float newTotal = previousTotal + Float.parseFloat(price);
+//                        Float previousTotal = Float.parseFloat(snapshot.child("totalSpent").getValue().toString());
+//                        Float newTotal = previousTotal + Float.parseFloat(snapshot.child("price").getValue().toString());
 //                        FirebaseDatabase.getInstance().getReference("Users").child(user.userID).child("totalSpent").setValue(newTotal.toString());
 //                    }
 //

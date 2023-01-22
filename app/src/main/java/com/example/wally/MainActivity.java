@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Intent i = new Intent(MainActivity.this, Pie_chart.class);
 //                startActivity(i);
                 break;
+
+            case R.id.btnTest:
+                Intent i = new Intent(MainActivity.this, Pie_chart.class);
+                startActivity(i);
+                break;
         }
     }
 
